@@ -1,5 +1,6 @@
 ---
 title: "Assignment 2"
+author: "Zhirui Gu"
 format: html
 ---
 
@@ -11,14 +12,17 @@ format: html
 #(a)
 x <- c(1:20)
 x
+### x is the final answer
 
 #(b)
 x <- c(20:1)
 x
+### x is the final answer
 
 #(c)
 x <- c(1:20,19:1)
 x
+### x is the final answer
 
 #(d)
 tmp <- c(4,6,3)
@@ -27,18 +31,593 @@ tmp
 #(e)
 x <- rep(c(4,6,3),10)
 x
+### x is the final answer
 
 #(f)
 x <- c(rep(c(4,6,3),10,),4)
 x
+### x is the final answer
 
 #(g)
 x <- c(rep(c(4),10),rep(c(6),20),rep(c(3),30))
 x
+### x is the final answer
 ```
 
 ### Question 2
 
 ```{r}
+x <- seq(3,6, by=0.1)
+y <- exp(x)*cos(x)
+y
+### y is the final answer
+```
+
+### Question 3
+
+```{r}
+#(a)
+x <- seq(3,36, by=3)
+y <- seq(1,34, by=3)
+z <- 0.1^x*0.2^y
+z
+### z is the final answer
+
+#(b)
+x <- 2^c(1:25)
+y <- c(1:25)
+z<- x/y
+z
+### z is the final answer
+```
+
+### Question 4
+
+```{r}
+#(a)
+i <- c(10:100)
+s <- sum(i^3 + 4*i^2)
+s
+### s is the final answer
+
+#(b)
+i <- c(1:25)
+s <- sum(2^i/i + 3^i/i^2)
+s
+### s is the final answer
+```
+
+### Question 5
+
+```{r}
+#(a)
+label <- paste("label", 1:30, sep=" ")
+
+#(b)
+fn <- paste("fn", 1:30, sep = "")
+```
+
+### Question 6
+
+```{r}
+set.seed(50)
+xVec <- sample(0:999, 250, replace=T)
+yVec <- sample(0:999, 250, replace=T)
+n <- length(xVec)
+
+#(a)
+p_a <- yVec[-1] - xVec[-n]
+
+#(b)
+p_b <- sin(yVec[-n]) / cos(xVec[-1])
+
+#(c)
+p_c <- xVec[1:(n-2)] + 2 * xVec[2:(n-1)] - xVec[3:n]
+
+#(d)
+p_d <- sum(exp(-xVec[-1]) / (xVec[-n] + 10))
+```
+
+### Question 7
+
+```{r}
+set.seed(50)
+xVec <- sample(0:999, 250, replace=T)
+yVec <- sample(0:999, 250, replace=T)
+n <- length(xVec)
+
+#(a)
+p_a <- yVec[yVec > 600]
+
+#(b)
+p_b <- which(yVec > 600)
+
+#(c)
+p_c <- xVec[yVec > 600]
+
+#(d)
+x_bar <- mean(xVec)
+p_d <- sqrt(abs(xVec - x_bar))
+
+#(e)
+y_max <- max(yVec)
+p_e <- sum(abs(yVec - y_max) <= 200)
+
+#(f)
+p_f <- sum(xVec %% 2 == 0)
+
+#(g)
+order_y <- order(yVec)
+p_g <- xVec[order_y]
+
+#(h)
+index <- seq(1,length(yVec),by = 3)
+p_h <- yVec[index]
+```
+
+### Question 8
+
+```{r}
+i <- 1:19
+s <- (2 * i) / (2*i + 1)
+SUM <- sum(c(1,cumprod(s)))
+```
+
+# Exercise 2
+
+### Question 1
+
+```{r}
+#(a)
+A <- matrix(c(1,5,-2,1,2,-1,3,6,-3),3,3)
+A %*% A %*% A
+
+#(b)
+A[,3] <- A[,2]+A[,3]
+A
+```
+
+### Question 2
+
+```{r}
+B <- matrix(c(10,-10,10),byrow=TRUE,nrow=15,ncol=3)
+B
+
+B_1 <- t(B) %*% B
+B_2 <- crossprod(B)
+B_1 == B_2
+```
+
+### Question 3
+
+```{r}
+metE <- matrix(c(0),6,6)
+
+row(metE)
+col(metE)
+
+col(metE)-row(metE)
+abs(col(metE)-row(metE)) == 1
+```
+
+### Question 4
+
+```{r}
+outer(0:4,0:4,"+")
+```
+
+### Question 5
+
+```{r}
+#(a)
+i <- 1:5
+j <- 1:5
+A <- outer(i,j, function(i,j) (i + j - 2) %% 5)
+
+#(b)
+i <- 1:10
+j <- 1:10
+B <- outer(i,j, function(i,j) (i + j - 2) %% 10)
+
+# (c)
+i <- 1:9
+j <- 1:9
+C <- outer(i,j, function(i,j) (i - j) %% 9)
+```
+
+### Question 6
+
+```{r}
+i <- 1:5
+j <- 1:5
+A <- outer(i, j, function(i, j) abs(i - j) + 1)
+
+y <- c(7,-1,-3,5,17)
+
+x <- solve(A, y)
+x
+```
+
+### Question 7
+
+```{r}
+set.seed(75)
+aMat <- matrix( sample(10, size=60, replace=T), nr=6)
+aMat
+
+#(a)
+p_a <- rowSums(aMat > 4)
+p_a
+
+#(b)
+p_b <- which(rowSums(aMat == 7) == 2)
+p_b
+
+#(c)
 
 ```
+
+
+# Exercise 3
+
+### Question 1
+
+```{r}
+# (a)
+tmpFn1 <- function(xVec){
+  n = length(xVec)
+  return(xVec^(1:n))
+}
+
+tmpFn2 <- function(xVec){
+  n = length(xVec)
+  return(xVec^(1:n) / (1:n))
+}
+
+#(b)
+tmpFn3 <- function(x,n){
+  k = 1:n
+  return(1 + sum(x^k / k))
+}
+```
+
+### Question 2
+
+```{r}
+tmpFn <- function(xVec) {
+  n = length(xVec)
+  res = numeric(n-2)
+  for (i in 1:(n-2)) {
+  res[i] <- mean(xVec[i:(i+2)])
+  }
+  return(res)
+}
+
+tmpFn(c(1:5,6:1))
+```
+
+### Question 3
+
+```{r}
+tmpFn <- function(xVec) {
+  y = numeric(length(xVec))
+  y[xVec < 0] = xVec[xVec < 0]^2 + 2*xVec[xVec < 0] + 3
+  y[xVec >= 0 & xVec < 2] = xVec[xVec >= 0 & xVec < 2] + 3
+  y[xVec >= 2] = xVec[xVec >= 2]^2 + 4*xVec[xVec >= 2] - 7
+  return(y)
+}
+
+x <- seq(-3,3,length.out=60)
+y <- tmpFn(x)
+plot(x,y)
+```
+
+### Question 4
+
+```{r}
+A <- matrix(c(1,5,-2,1,2,-1,3,6,-3),3,3)
+
+tmpFn_1 <- function(a) {
+  if(!is.matrix(a)) stop("Input is not a matrix!")
+  a[a %% 2 == 1] <- 2*a[a %% 2 == 1]
+  a[a %% 2 == -1] <- 2*a[a %% 2 == -1]
+  return(a)
+}
+
+tmpFn_1(A)
+```
+
+# Exercise 4
+
+### Question 1
+
+```{r}
+#(a)
+f_a <- function(xVec,yVec){
+  zVec <- outer(yVec, xVec, "<")
+  return(colSums(zVec))
+}
+
+#(b)
+f_b <- function(xVec,yVec){
+  zVec <- sapply(xVec, function(xVec_k) sum(yVec < xVec_k))
+  return(zVec)
+}
+
+#(c)
+f_c <- function(xVec,yVec){
+  zVec <- vapply(xVec, function(xVec_k) sum(yVec < xVec_k), FUN.VALUE = integer(1))
+  return(zVec)
+}
+
+#(d)
+
+
+#(e)
+set.seed(1)
+a <- runif(10,0,100)
+b <- runif(10,1,99)
+f_a(a,b)
+f_b(a,b)
+f_c(a,b)
+
+set.seed(1)
+system.time(f_a(a,b), gcFirst = TRUE)
+system.time(f_b(a,b), gcFirst = TRUE)
+system.time(f_c(a,b), gcFirst = TRUE)
+```
+
+### Question 2
+
+```{r}
+#(a)
+A_no_NA <- function(A){
+  c_d = colSums(is.na(A))
+  c_k = c_d == 0
+  A_1 = A[, c_k, drop=FALSE]
+  return(A_1)
+}
+
+A <- matrix(c(1,NA,3,4,5,6,7,NA,9),3,3,byrow=TRUE)
+A_no_NA(A)
+
+#(b)
+A_no_NA_1 <- function(A){
+  c_d = colSums(is.na(A))
+  r_d = rowSums(is.na(A))
+  c_k <- c_d == 0
+  r_k <- r_d == 0
+  A_2 = A[r_k, c_k, drop=FALSE]
+  return(A_2)
+}
+A_no_NA_1(A)
+```
+
+### Quesion 3
+
+```{r}
+# (a)
+empCopula <- function(u,v,xVec,yVec){
+  n <- length(xVec)
+  r <- rank(xVec)
+  s <- rank(yVec)
+  U <- r / (n + 1)
+  V <- s / (n + 1)
+  P_1 <- mean((U <= u) & (V <= v))
+  return(P_1)
+}
+
+# (b)
+empCopula_2 <- function(u,v,xVec,yVec)
+   n <- length(xVec)
+   r <- rank(xVec)
+   s <- rank(yVec)
+   U <- r / (n + 1)
+   V <- s / (n + 1)
+   if (length(u) == 1L) u <- rep(u, length(v))
+   if (length(v) == 1L) v <- rep(v, length(u))
+   MatU <- outer(U,u,'<=')
+   MatV <- outer(V,v,'<=')
+   P_2 <- colMeans(MatU & MatV)
+   return(P_2)
+```
+
+### Question 4
+
+```{r}
+#(a)
+funA <- function(n){
+  S_o <- 0
+  for (r in 1:n) {
+    S_i <- 0
+    for (s in 1:r) {
+      S_i <- S_i + s^2 / (10 + 4*r^3)
+    }
+    S_o <- S_o + S_i
+  }
+  return(S_o)
+}
+funA(100)
+system.time(funA(100))
+
+#(b)
+funB <- function(n){
+  r <- row(matrix(0,n,n))
+  s <- col(matrix(0,n,n))
+  S <- (s^2) / (10 + 4*r^3) * (s <= r)
+  return(sum(S))
+}
+funB(100)
+system.time(funB(100))
+
+#(c)
+funC <- function(n){
+  r <- 1:n
+  s <- 1:n
+  Mat <- outer(r,s,function(r,s) (s^2) / (10 + 4*r^3) * (s <= r))
+  return(sum(Mat))
+}
+funC(100)
+system.time(funC(100))
+
+#(d)
+funD_a <- function(r){
+  As <- sum((1:r)^2 / (10 + 4*r^3))
+  return(As)
+}
+
+funD <- function(n){
+  D <- sum(sapply(1:n, funD_a))
+  return(D)
+}
+funD(100)
+system.time(funD(100))
+
+#(e)
+funE_a <- function(r,s){
+  (s^2) / (10 + 4*r^3) * (s <= r)
+}
+
+funE <- function(n){
+  r <- rep(1:n, each = n)
+  s <- rep(1:n, times = n)
+  E <- sum(mapply(funE_a,r,s))
+  return(E)
+}
+funE(100)
+system.time(funE(100))
+
+# funB & funC are the fastest.
+```
+
+# Exercise 5
+
+### Question 1 
+### (This question is completed with assistance of my friend in CS major)
+
+```{r}
+#(a)
+tsEwma <- function(tsDat, m0 = 0, delta = 0.7){
+  n <- length(tsDat)
+  out <- numeric(n)
+  m_prev <- m0
+  
+  for(t in seq_len(n)){
+  zt <- tsDat[t]
+  m_curr <- delta * m_prev + (1 - delta) * zt
+  out[t] <- m_curr
+  m_prev <- m_curr
+  }
+  S <- ts(out, start = start(tsDat), frequency = frequency(tsDat))
+  return(S)
+}
+
+#(b)
+tsEwma_fast <- function(tsDat, m0 = 0, delta = 0.7) {
+  z <- unclass(tsDat)
+  n <- length(z)
+  out <- numeric(n)
+  m_prev <- m0
+
+  for (t in seq_len(n)) {
+    m_prev <- delta * m_prev + (1 - delta) * z[t]
+    out[t] <- m_prev
+  }
+  S <- ts(out, start = start(tsDat), frequency = frequency(tsDat))
+  return(S)
+}
+```
+
+### Question 2
+
+```{r}
+#(a)
+myListFn <- function(n) {
+  x <- rnorm(n)
+  xbar <- mean(x)
+  
+  if(xbar > 0){
+    y <- rexp(n, rate = 1 / xbar)
+  } else if(xbar < 0){
+    y <- -rexp(n,rate = 1 / (-xbar))
+  } else{
+    y <- numeric(n)
+  }
+  k <- sum(abs(y) > abs(x))
+  A <- list(xVec = x, yVec = y, count = k)
+  return(A)
+}
+
+#(b)
+lapply( rep(10,4), myListFn )
+sapply( rep(10,4), myListFn )
+
+set.seed(1)
+myList <- lapply(rep(10, 1000), myListFn)
+
+#(c)
+list_y <- lapply(myList, '[[',"yVec")
+str(list_y[[1]])
+length(list_y)
+
+#(d)
+MatY <- do.call(cbind, list_y)
+dim(MatY)
+
+#(e)
+myList_count <- lapply(myList, function(z) { z$count <- NULL; z })
+str(myList_count[[1]])
+
+#(f)
+idx_gt2 <- sapply(myList, `[[`, "count") > 2
+myList_gt2 <- myList[idx_gt2]
+length(myList_gt2)
+```
+
+### Question 3
+
+```{r}
+X <- do.call(rbind, lapply(myList, `[[`, "xVec"))
+Y <- do.call(rbind, lapply(myList, `[[`, "yVec"))
+dim(X)
+dim(Y)
+
+#(a)
+w <- 1:10
+p_a <- as.vector( (X %*% w) / (Y %*% w) )
+
+#(b)
+p_b <- X - Y
+
+#(c)
+i <- 1:1000
+X_1   <- sum(i * X[, 2])
+Y_1 <- sum(10 * Y[, 2])
+p_c <- X_1 / Y_1
+```
+
+### Question 4
+### (This question is completed with assistance of my friend in CS major)
+
+```{r}
+#(a)
+testFn <- function(A){
+  mins_ik <- apply(A, c(2, 3), min)
+  sums_ik <- apply(A, c(2, 3), sum)
+  maxs_ik <- apply(A, c(2, 3), max)
+  
+  wArr <- sweep(A, MARGIN = c(2, 3), STATS = mins_ik, FUN = "-")
+  zMat <- sums_ik - maxs_ik
+  list(wArr = wArr, zMat = zMat)
+}
+
+#(b)
+testFn2 <- function(A) {
+  d3 <- dim(A)[3]
+  A_pow <- sweep(A, MARGIN = 3, STATS = 1:d3, FUN = "^")
+  apply(A_pow, c(2, 3), sum)
+}
+```
+
+
+

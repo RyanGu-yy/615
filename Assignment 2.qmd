@@ -408,10 +408,10 @@ empCopula <- function(u,v,xVec,yVec){
 }
 
 # (b)
-empCopula_2 <- function(u,v,xVec,yVec)
+empCopula_2 <- function(u,v,xVec,yVec){
    n <- length(xVec)
-   r <- rank(xVec)
-   s <- rank(yVec)
+   u <- rank(xVec)
+   v <- rank(yVec)
    U <- r / (n + 1)
    V <- s / (n + 1)
    if (length(u) == 1L) u <- rep(u, length(v))
@@ -420,6 +420,7 @@ empCopula_2 <- function(u,v,xVec,yVec)
    MatV <- outer(V,v,'<=')
    P_2 <- colMeans(MatU & MatV)
    return(P_2)
+}
 ```
 
 ### Question 4
